@@ -6,6 +6,10 @@ import { useState } from 'react';
 const EventDashBoard = ({ formOpen, setformOpen }) => {
     const [events, setEvents] = useState(sampleData);
 
+    const handleCreateEvent = (event) => {
+        setEvents([...events, event]);
+    }
+
     return (
         <Grid>
             <Grid.Column width={10}>
@@ -13,7 +17,11 @@ const EventDashBoard = ({ formOpen, setformOpen }) => {
             </Grid.Column>
             <Grid.Column width={6}>
                 {formOpen &&
-                    <EventForm  setformOpen={setformOpen}/>}
+                    <EventForm
+                        setformOpen={setformOpen}
+                        setEvents={setEvents}
+                        createEvent={handleCreateEvent}
+                    />}
             </Grid.Column>
         </Grid>
     );
