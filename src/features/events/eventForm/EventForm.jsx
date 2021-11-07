@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { Segment, Header, Form, Button } from 'semantic-ui-react';
 import cuid from 'cuid';
+import { Link } from 'react-router-dom';
 
-const EventForm = ({ setformOpen, createEvent }) => {
-    const initialValues = {
+const EventForm = ({ setformOpen, createEvent, selectedEvent, updateEvent }) => {
+    const initialValues = selectedEvent ?? {
         title: '',
         category: '',
         description: '',
@@ -15,26 +16,27 @@ const EventForm = ({ setformOpen, createEvent }) => {
     const [values, setValues] = useState(initialValues);
 
     const handleFormSubmit = () => {
-        createEvent(
-            {
-                ...values,
-                id: cuid(),
-                hostedBy: 'Bob',
-                attendees: [],
-                hostPhotoURL: '/assets/user.png',
-            });
+        selectedEvent
+            ? updateEvent({ ...selectedEvent, ...values })
+            : createEvent(
+                {
+                    ...values,
+                    id: cuid(),
+                    hostedBy: 'Bob',
+                    attendees: [],
+                    hostPhotoURL: '/assets/user.png',
+                });
         setformOpen(false);
     };
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setValues({ ...values, [name]: value });
-
-    }
+    };
 
     return (
         <Segment clearing>
-            <Header content='Create new event' />
+            <Header content={selectedEvent ? 'Editing event' : 'Create new event'} />
             <Form onSubmit={handleFormSubmit}>
                 <Form.Field>
                     <input
@@ -83,10 +85,9 @@ const EventForm = ({ setformOpen, createEvent }) => {
                         name='date'
                         onChange={e => handleInputChange(e)} />
                 </Form.Field>
-                <Button type='submit' floated='right' positive content='Sunmit' />
-                <Button type='submit' floated='right' content='Cancel' onClick={() => {
-                    setformOpen(false);
-                }} />
+                <Button type='submit' floated='right' positive content='Sunbmit' />
+                <Button type='submit' floated='right' content='Cancel' 
+                    as={Link} to='events' />
             </Form>
         </Segment>
     )
