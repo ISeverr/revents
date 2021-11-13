@@ -1,4 +1,4 @@
-import { CREATE_EVENT, UPDATE_EVENT, DELETE_EVENT } from './EventActions';
+import { CREATE_EVENT, UPDATE_EVENT, DELETE_EVENT } from './EventConstans';
 
 export function createEvent(event) {
     return {

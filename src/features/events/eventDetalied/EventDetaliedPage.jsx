@@ -6,7 +6,7 @@ import EventDetaliedInfo from './EventDetaliedInfo';
 import EventDetaliedSideBar from './EventDetaliedSideBar';
 
 
-const EventDetaliedPage = ({match}) => {
+const EventDetaliedPage = ({ match }) => {
     const event = useSelector(state => state.event.events.find(e => e.id === match.params.id));
 
     return (
@@ -17,7 +17,7 @@ const EventDetaliedPage = ({match}) => {
                 <EventDetaliedChat />
             </Grid.Column>
             <Grid.Column width={6} >
-                <EventDetaliedSideBar attendees={event.attendees}/>
+                <EventDetaliedSideBar attendees={event.attendees} />
             </Grid.Column>
         </Grid>
     )

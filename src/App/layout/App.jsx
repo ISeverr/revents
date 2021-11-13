@@ -25,7 +25,7 @@ function App() {
               <Route exact path='/events' component={EventDashBoard} />
               <Route exact path='/sandbox' component={SandBox} />
               <Route path='/events/:id' component={EventDetailedPage} />
-              <Route path={['/createEvent', 'manage/:id']} component={EventForm} />
+              <Route path={['/manage/:id', '/createEvent']} component={EventForm} />
           </Switch>
           </Container>
         </>
