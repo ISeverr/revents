@@ -6,6 +6,7 @@ import App from './App/layout/App'
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import  configureStore  from './App/store/configureStore';
+import { BrowserRouter } from 'react-router-dom';
 
 const store = configureStore();
 
@@ -14,7 +15,9 @@ const rootEl = document.getElementById('root');
 function render() {
   ReactDOM.render(
     <Provider store={store}>
+      <BrowserRouter>
       <App />
+      </BrowserRouter>
     </Provider>,
     rootEl
   );

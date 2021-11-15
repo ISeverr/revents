@@ -5,17 +5,15 @@ import HomePage from '../../features/home/HomePage';
 import EventDetailedPage from '../../features/events/eventDetalied/EventDetaliedPage';
 import { Container } from 'semantic-ui-react';
 import EventForm from '../../features/events/eventForm/EventForm';
-import { Route, Switch } from 'react-router';
-import { BrowserRouter, } from 'react-router-dom';
+import { Route, Switch, useLocation, } from 'react-router';
 import SandBox from '../../features/tset/Sandbox';
 
 
-
-
 function App() {
+  const { key } = useLocation();
 
   return (
-    <BrowserRouter>
+    <>
       <Route exact path='/' component={HomePage} />
       <Route path={'/(.+)'} render={() => (
         <>
@@ -25,12 +23,12 @@ function App() {
               <Route exact path='/events' component={EventDashBoard} />
               <Route exact path='/sandbox' component={SandBox} />
               <Route path='/events/:id' component={EventDetailedPage} />
-              <Route path={['/manage/:id', '/createEvent']} component={EventForm} />
-          </Switch>
+              <Route path={['/manage/:id', '/createEvent']} component={EventForm} key={key} />
+            </Switch>
           </Container>
         </>
       )} />
-    </BrowserRouter>
+    </>
   );
 }
 
